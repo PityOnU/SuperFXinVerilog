@@ -6,15 +6,15 @@
 
 */
 
-module fig_04b_block_078(
+module fig_04b_block_078 (
 	input clk,
 	input [3:0] instr,
 	input resflags,
 	input to,
 	input from,
 	input [3:0] ha,
-	input ssel,
-	input dsel,
+	input [1:0] ssel,
+	input [1:0] dsel,
 	output [3:0] ysel,
 	output [3:0] zsel );
 	

@@ -24,7 +24,7 @@ Nintendo Entertainment System Development Manual Book II."
 
 */
 
-module fig_06_block_152(
+module fig_06_block_152 (
 	input [15:0] x,
 	input [15:0] y,
 	input add_sub_sel,
