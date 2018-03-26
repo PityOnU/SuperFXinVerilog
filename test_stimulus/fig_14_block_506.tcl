@@ -1,6 +1,7 @@
 #Clear everything and start the simulator from 0
 restart
 
+ isim force add {/fig_14_block_506/clk} 1 -radix bin -value 0 -radix bin -time 5ps -repeat 10 ps
 isim force add {/fig_14_block_506/clr} 1 -radix bin
 isim force add {/fig_14_block_506/set} 0 -radix bin 
 isim force add {/fig_14_block_506/selector} 0000000000000000 -radix hex

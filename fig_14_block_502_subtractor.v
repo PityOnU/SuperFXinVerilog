@@ -2,20 +2,25 @@
 
 /*
 
+This is the Verilog implementation of the subtractor within the instruction 
+cache's address comparator. It is built using the same components as the ALU's 
+adder/subtractor, except it is adjusted for size and permanently set to perform 
+subtraction.
+
 */
 
 module fig_14_block_502_subtractor(
-	input [12:0] x,
-	input [12:0] y,
-	output [12:0] z	
-    );
-//Propogate, generate, and carry signals used internally
-	wire [12:0] p;
-	wire [12:0] g;
+	input [11:0] x,
+	input [11:0] y,
+	output [11:0] z );
+	
+	//Propogate, generate, and carry signals used internally
+	wire [11:0] p;
+	wire [11:0] g;
 	wire [11:0] c_out;
 
 	//Internal value of y - needed so we can just invert to perform subtraction
-	reg [12:0] y_intern;
+	reg [11:0] y_intern;
 	
 	//Logical operations required to change between add and subtract
 	//Black magic related to two's complement
@@ -24,7 +29,7 @@ module fig_14_block_502_subtractor(
 		y_intern = ~y;
 	end
 	
-	//Create the 16 1-bit adders we need
+	//Create the 12 1-bit adders we need
 	full_adder full_adder_bit_00 (
 		.x(x[0]),
 		.y(y_intern[0]),
@@ -121,16 +126,8 @@ module fig_14_block_502_subtractor(
 		.g(g[11]),
 		.z(z[11])
 	);
-	full_adder full_adder_bit_12 (
-		.x(x[12]),
-		.y(y_intern[12]),
-		.c(c_out[11]),
-		.p(p[12]),
-		.g(g[12]),
-		.z(z[12])
-	);	
 	
-	//Create the 4, 4-bit lookahead carry bit generator
+	//Create the 3, 4-bit lookahead carry bit generator
 	carry_lookahead_logic_4_bit carry_generator_nibble_0 (
 		.c_in(1'b1),
 		.p(p[3:0]),

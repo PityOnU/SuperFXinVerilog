@@ -1,6 +1,0 @@
-verilog work "full_adder.v"
-verilog work "carry_lookahead_logic_4_bit.v"
-verilog work "fig_6_block_152.v"
-verilog work "fig_4a_block_50.v"
-verilog work "fig_1_block_2.v"
-verilog work "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

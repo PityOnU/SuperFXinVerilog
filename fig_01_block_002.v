@@ -20,7 +20,7 @@ and names of other pins/signals is inferred from Fig. 1.
 
 */
 
-module fig_04(
+module fig_01_block_002(
 	output [23:0] rom_a, //P26-2
 	input [7:0] rom_d, //P35-28
 	input [23:0] ha, //P62-37
@@ -52,8 +52,9 @@ module fig_04(
 	wire [15:0] z;
 	wire ov;
 	wire cy;
+
 	
-	fig_04a_block_050 alu (
+	fig_04a_block_050 fig_04a_block_050 (
 		.x(x),
 		.y(y),
 		.instr(instr),
@@ -62,6 +63,32 @@ module fig_04(
 		.sgn(sgn),
 		.cy(cy),
 		.z(z)
+	);
+	
+	fig_04b_block_076_078 fig_04b_block_076_078 (
+		.clk(clk_21mhz),
+		.enable,
+		.data_in,
+		.disable_l,
+		.enable_h,
+		.disable_h,
+		.cchld,
+		.pcen,
+		.loopen,
+		.reset,
+		.rn15,
+		.x(x),
+		.y(y)
+	);
+	
+	fig_04b_block_068_070_072_094_096 fig_04b_block_068_070_072_094_096 (
+		.clk(clk_21mhz),
+		.pc,
+		.instr_in,
+		.cache_start,
+		.romrdy,
+		.fetch_req,
+		.instr_out
 	);
 	
 

@@ -16,16 +16,16 @@ In the text, the I/O and behavior for this block is described in 33:43-68 and
 
 */
 
-module fig_04a_block_050(
+module fig_04a_block_050 (
 	//Signals from the main buses
 	input [15:0] x,
 	input [15:0] y,
 	input [7:0] instr,
 	
 	//Control signals from the instruction decoder
-	//Selector signal for block 150
+	//Selector signal for Figure 6 block 150
 	input y_src_sel,
-	//Selector signal for block 164
+	//Selector signal for Figure 6 block 164
 	input [2:0] z_src_sel,
 	//Control signal for ALU to perform addition or subtraction
 	input add_sub_sel,
@@ -43,37 +43,37 @@ module fig_04a_block_050(
 	reg [15:0] swap_fn;
 	wire [15:0] alu_result;
 
-	//Block 154
+	//Figure 6 Block 154
 	always @( * )
 	begin
 		and_fn = x & y;
 	end
 	
-	//Block 156
+	//Figure 6 Block 156
 	always @( * )
 	begin
 		or_fn = x | y;
 	end
 	
-	//Block 158
+	//Figure 6 Block 158
 	always @( * )
 	begin
 		xor_fn = x ^ y;
 	end
 	
-	//Block 160
+	//Figure 6 Block 160
 	always @( * )
 	begin
 		shift_fn = { cy, x[15:1] };
 	end
 	
-	//Block 162
+	//Figure 6 Block 162
 	always @( * )
 	begin
 		swap_fn = { x[7:0], x[15:8] };
 	end
 	
-	//Logic for block 150
+	//Figure 6 Block 150
 	always @( * )
 	begin
 		case ( y_src_sel )
@@ -88,7 +88,7 @@ module fig_04a_block_050(
 		endcase
 	end
 	
-	//Logic for block 164
+	//Figure 6 Block 164
 	always @( * )
 	begin
 		case ( z_src_sel )
@@ -119,8 +119,8 @@ module fig_04a_block_050(
 		endcase
 	end
 	
-	//Module representing block 152
-	fig_06_block_152 adder_subtractor (
+	//Figure 6 Block 152
+	fig_06_block_152 fig_06_block_152 (
 		.x(x),
 		.y(selected_y),
 		.add_sub_sel(add_sub_sel),
