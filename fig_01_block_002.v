@@ -91,5 +91,26 @@ module fig_01_block_002(
 		.instr_out
 	);
 	
+	fig_04b_block_076 fig_04b_block_076 (
+		.clk(clk_21mhz),
+		.y(y),
+		.z(z),
+		.enable,
+		.enable_l,
+		.disable_l,
+		.enable_h,
+		.disable_h,
+		.cchld,
+		.pcen,
+		.loopen,
+		.fromset,
+		.reset,
+		.xsel,
+		.ysel,
+		.zsel,
+		.xbus,
+		.ybus
+	);
+	
 
 endmodule

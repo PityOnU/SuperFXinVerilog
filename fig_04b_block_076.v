@@ -8,7 +8,9 @@
 
 module fig_04b_block_076 (
 	input clk,
+	input [15:0] y,
 	input [15:0] z,
+	input enable,
 	input enable_l,
 	input disable_l,
 	input enable_h,
@@ -16,82 +18,98 @@ module fig_04b_block_076 (
 	input cchld,
 	input pcen,
 	input loopen,
+	input fromset,
 	input reset,
-	input rn15,
+	//Pretty sure this is just r13, but I may be wrong
+	//The documentation is very vague here
+	//input rn15,
 	input [3:0] xsel,
 	input [3:0] ysel,
 	input [3:0] zsel,
-	output [15:0] x,
-	output reg [15:0] y );
+	output [15:0] xbus,
+	output [15:0] ybus );
 	
+	wire [15:0] r00;
+	wire [15:0] r01;
+	wire [15:0] r02;
+	wire [15:0] r03;
+	wire [15:0] r04;
+	wire [15:0] r05;
+	wire [15:0] r06;
+	wire [15:0] r07;
+	wire [15:0] r08;
+	wire [15:0] r09;
+	wire [15:0] r10;
+	wire [15:0] r11;
+	wire [15:0] r12;
+	wire [15:0] r13;
+	wire [15:0] r14;
+	wire [15:0] r15;
 	
-	
-	wire [15:0] selected_first_set;
-	wire [15:0] selected_second_set;
-	wire [15:0] selected_third_set;
-	wire [15:0] selected_fourth_set;
-	wire [15:0] selected_y;
-	
-	reg [15:0] selected_y_buffer;
-	
-	
-	
-	
-	
-	//Figure 17 block 608
-	mux_2_bit_16_wide fig_17_block_608 (
-		.selector(ysel[1:0]),
-		.data_input({ r00, r01, r02, r03 }),
-		.selected_output(selected_first_set) 
+	fig_04b_block_076_registers fig_04b_block_076_registers (
+		.clk(clk),
+		.z(z),
+		.enable(enable),
+		.enable_l(enable_l),
+		.disable_l(disable_l),
+		.enable_h(enable_h),
+		.disable_h(disable_h),
+		.cchld(cchld),
+		.pcen(pcen),
+		.loopen(loopen),
+		.reset(reset),
+		.zsel(zsel),
+		.r00(r00),
+		.r01(r01),
+		.r02(r02),
+		.r03(r03),
+		.r04(r04),
+		.r05(r05),
+		.r06(r06),
+		.r07(r07),
+		.r08(r08),
+		.r09(r09),
+		.r10(r10),
+		.r11(r11),
+		.r12(r12),
+		.r13(r13),
+		.r14(r14),
+		.r15(r15)
 	);
 	
-	//Figure 17 block 610
-	mux_2_bit_16_wide fig_17_block_610 (
-		.selector(ysel[1:0]),
-		.data_input({ r04, r05, r06, r07 }),
-		.selected_output(selected_second_set) 
+	fig_04b_block_076_x_select fig_04b_block_076_x_select (
+		.clk(clk),
+		.xsel(xsel),
+		.r00(r00),
+		.r01(r01),
+		.r07(r07),
+		.r08(r08),
+		.r15(r15),
+		.fromset(fromset),
+		.y(y),
+		.xbus(xbus)
 	);
 	
-	//Figure 17 block 612
-	mux_2_bit_16_wide fig_17_block_612 (
-		.selector(ysel[1:0]),
-		.data_input({ r08, r09, r10, r11 }),
-		.selected_output(selected_third_set) 
+	fig_04b_block_076_y_select fig_04b_block_076_y_select (
+		.clk(clk),
+		.ysel(ysel),
+		.r00(r00),
+		.r01(r01),
+		.r02(r02),
+		.r03(r03),
+		.r04(r04),
+		.r05(r05),
+		.r06(r06),
+		.r07(r07),
+		.r08(r08),
+		.r09(r09),
+		.r10(r10),
+		.r11(r11),
+		.r12(r12),
+		.r13(r13),
+		.r14(r14),
+		.r15(r15),
+		.ybus(ybus)
 	);
-	
-	//Figure 17 block 614
-	mux_2_bit_16_wide fig_17_block_614 (
-		.selector(ysel[1:0]),
-		.data_input({ r12, r13, r14, r15 }),
-		.selected_output(selected_fourth_set) 
-	);
-	
-	//Figure 17 block 616
-	mux_2_bit_16_wide fig_17_block_616 (
-		.selector(ysel[3:2]),
-		.data_input({ selected_first_set, selected_second_set, selected_third_set, selected_fourth_set }),
-		.selected_output(selected_y) 
-	);
-	
-	//Figure 17 block 617
-	always @( negedge clk )
-	begin
-		selected_y_buffer <= selected_y;
-	end
-	
-	//Drive the output
-	always @( * )
-	begin
-		y = selected_y_buffer;
-	end
-	
-	//Figure 17 block 618
-	always @( negedge clk )
-	begin
-		if ( ] )
-		begin
-			r14 <= z;
-		end
-	end
 	
 endmodule

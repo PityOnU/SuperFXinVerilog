@@ -37,14 +37,6 @@ module fig_17_register_15(
 			begin
 				pc <= pc + 1;
 			end
-			else
-			begin
-				pc <= pc;
-			end
-		end
-		else
-		begin
-			pc <= pc;
 		end
 	end
 
