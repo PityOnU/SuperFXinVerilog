@@ -65,22 +65,6 @@ module fig_01_block_002(
 		.z(z)
 	);
 	
-	fig_04b_block_076_078 fig_04b_block_076_078 (
-		.clk(clk_21mhz),
-		.enable,
-		.data_in,
-		.disable_l,
-		.enable_h,
-		.disable_h,
-		.cchld,
-		.pcen,
-		.loopen,
-		.reset,
-		.rn15,
-		.x(x),
-		.y(y)
-	);
-	
 	fig_04b_block_068_070_072_094_096 fig_04b_block_068_070_072_094_096 (
 		.clk(clk_21mhz),
 		.pc,
@@ -112,5 +96,17 @@ module fig_01_block_002(
 		.ybus
 	);
 	
+	fig_04b_block_078 fig_04b_block_078 (
+		.clk(clk),
+		.instr(instr),
+		.resflags,
+		.to,
+		.from,
+		.ha,
+		.ssel,
+		.dsel,
+		.ysel,
+		.zsel
+	);	
 
 endmodule
